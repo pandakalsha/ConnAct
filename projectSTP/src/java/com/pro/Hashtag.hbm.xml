@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Jul, 2015 4:58:05 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pro.Hashtag" table="hashtag" catalog="stpdb" optimistic-lock="version">
+        <id name="HId" type="java.lang.Integer">
+            <column name="h_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="member" class="com.pro.Member" fetch="select">
+            <column name="creator" not-null="true" />
+        </many-to-one>
+        <property name="tag" type="string">
+            <column name="tag" length="45" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="65535" not-null="true" />
+        </property>
+        <property name="members" type="string">
+            <column name="members" length="1000" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+        <set name="postses" table="posts" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="h_id" />
+            </key>
+            <one-to-many class="com.pro.Posts" />
+        </set>
+    </class>
+</hibernate-mapping>

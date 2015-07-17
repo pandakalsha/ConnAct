@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Jul, 2015 4:58:05 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pro.Messages" table="messages" catalog="stpdb" optimistic-lock="version">
+        <id name="messageId" type="java.lang.Integer">
+            <column name="message_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="memberByReceiverId" class="com.pro.Member" fetch="select">
+            <column name="receiver_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="memberBySenderId" class="com.pro.Member" fetch="select">
+            <column name="sender_id" not-null="true" />
+        </many-to-one>
+        <property name="body" type="string">
+            <column name="body" length="65535" not-null="true" />
+        </property>
+        <property name="lastUpdate" type="timestamp">
+            <column name="last_update" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

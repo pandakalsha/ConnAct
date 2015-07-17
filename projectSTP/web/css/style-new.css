@@ -1,0 +1,9 @@
+div.posts
+{
+    z-index: 500;
+    position: fixed;
+    bottom: 10%;
+    margin-right: 2%;
+    width: 76.5%;
+
+}

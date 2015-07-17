@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Jul, 2015 4:58:05 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pro.Member" table="member" catalog="stpdb" optimistic-lock="version">
+        <id name="MId" type="java.lang.Integer">
+            <column name="m_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="team" class="com.pro.Team" fetch="select">
+            <column name="t_id" not-null="true" />
+        </many-to-one>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="45" not-null="true" />
+        </property>
+        <property name="username" type="string">
+            <column name="username" length="45" not-null="true" />
+        </property>
+        <property name="dob" type="timestamp">
+            <column name="dob" length="19" not-null="true" />
+        </property>
+        <property name="privilige" type="string">
+            <column name="privilige" length="2" not-null="true" />
+        </property>
+        <set name="postses" table="posts" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="creator" not-null="true" />
+            </key>
+            <one-to-many class="com.pro.Posts" />
+        </set>
+        <set name="messagesesForReceiverId" table="messages" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="receiver_id" not-null="true" />
+            </key>
+            <one-to-many class="com.pro.Messages" />
+        </set>
+        <set name="messagesesForSenderId" table="messages" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sender_id" not-null="true" />
+            </key>
+            <one-to-many class="com.pro.Messages" />
+        </set>
+        <set name="hashtags" table="hashtag" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="creator" not-null="true" />
+            </key>
+            <one-to-many class="com.pro.Hashtag" />
+        </set>
+    </class>
+</hibernate-mapping>
